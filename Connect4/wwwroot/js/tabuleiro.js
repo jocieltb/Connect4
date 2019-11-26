@@ -27,7 +27,7 @@ function CriarLinha(colunas) {
         posicaoDiv.classList.add('square');
         linha.appendChild(posicaoDiv);
         posicaoDiv.click = function () { jogarServidor(jogoId, this.id.substr(7)); };
-    }    
+    }
     return linha;
 }
 
@@ -92,7 +92,7 @@ function jogarServidor(jogoId, posicao) {
 function obterJogoServidor(id) {
     //Faz uma chamada no servidor.
     var xhttp = new XMLHttpRequest();
-     //Define qual o tipo de resposta, no caso um objeto JSON.
+    //Define qual o tipo de resposta, no caso um objeto JSON.
     xhttp.responseType = 'json'
     //Monta a URL que será invocada.
     var URLObterJogo = "/api/Jogo/Obter/" + id
@@ -129,20 +129,17 @@ function MontarTabuleiro(Tabuleiro) {
     for (coluna = 0; coluna < TamanhoColunas; coluna++) {
         for (linha = 0; linha < TamanhoLinhas; linha++) {
             AtualizarPosicao(coluna, linha, Tabuleiro.representacaoTabuleiro[coluna][linha]);
-            $("#posCol-" + coluna).click(function () {
-                jogarServidor(jogoId, this.id.substr(7));
-            });
         }
-        
+
     }
     //Adiciona um evento para no caso de ser clicado um dos espaços realizar uma jogada.    
-    /*for (coluna = 0; coluna < TamanhoColunas; coluna++) {
+    for (coluna = 0; coluna < TamanhoColunas; coluna++) {
         $("#posCol-" + coluna).click(function () {
             jogarServidor(jogoId, this.id.substr(7));
         });
-    }*/
-    
-    
+    }
+
+
 
 }
 /*

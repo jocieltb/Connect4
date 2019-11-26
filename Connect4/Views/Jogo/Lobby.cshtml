@@ -20,7 +20,7 @@ else
     <span>@Model.Jogador1.Nome</span>
 }
 
-    <span>Jogador 2:</span>
+<span> X Jogador 2:</span>
 @if (Model.Jogador2 == null)
 {
     <span>ESPERANDO O ADVERSÁRIO</span>
@@ -34,7 +34,9 @@ else
 {
     //É utilizado jogador1Id para evitar problemas caso o controller
     //não tenha incluído (include) explicitamente a propriedade Jogador
+    <br />
+    <br />
     <a asp-area="" asp-controller="Jogo"
        asp-action="Tabuleiro"
-       asp-route-id="@Model.Id">Iniciar Jogo</a>
+       asp-route-id="@Model.Id" class="btn btn-default">Iniciar Jogo</a>
 }
