@@ -224,7 +224,11 @@ namespace Connect4.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     Nascimento = model.Nascimento,
-                    Nome = model.Nome };
+                    Nome = model.Nome,
+                    CPF = model.CPF,
+                    Endereco = model.Endereco,
+                    CEP = model.CEP };
+                    
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

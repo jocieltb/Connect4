@@ -12,9 +12,10 @@ using System;
 namespace Connect4.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191126131213_v1")]
+    partial class v1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,10 +29,6 @@ namespace Connect4.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("CEP");
-
-                    b.Property<string>("CPF");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -39,8 +36,6 @@ namespace Connect4.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<string>("Endereco");
 
                     b.Property<int?>("JogadorId");
 

@@ -12,8 +12,8 @@ using System;
 namespace Connect4.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191125223256_v1")]
-    partial class v1
+    [Migration("20191126143839_v2")]
+    partial class v2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,6 +29,10 @@ namespace Connect4.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<string>("CEP");
+
+                    b.Property<string>("CPF");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -36,6 +40,8 @@ namespace Connect4.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("Endereco");
 
                     b.Property<int?>("JogadorId");
 

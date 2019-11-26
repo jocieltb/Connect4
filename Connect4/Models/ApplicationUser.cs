@@ -13,6 +13,12 @@ namespace Connect4.Models
     {
         public String Nome { get; set; }
 
+        public String CPF { get; set; }
+
+        public String Endereco { get; set; }
+
+        public String CEP { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime Nascimento { get; set; }
 
