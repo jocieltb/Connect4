@@ -58,6 +58,24 @@ namespace Connect4.Controllers
                             .Select(j => j)
                             .FirstOrDefault();
 
+            //Verifica se o id passado via parâmetro existe no banco de dados.
+            if (jogo.Jogador1 is JogadorPessoa)
+            {
+                //Caso seja, será necessário recuperar 
+                //Jogador.Usuário, para recuperar o nome do Jogador.
+                jogo.Jogador1 = _context.JogadorPessoas
+                                .Include(j => j.Usuario)
+                                .Where(j => j.Id == jogo.Jogador1Id)
+                                .FirstOrDefault();
+            }
+            if (jogo.Jogador2 is JogadorPessoa)
+            {
+                jogo.Jogador2 = _context.JogadorPessoas
+                                .Include(j => j.Usuario)
+                                .Where(j => j.Id == jogo.Jogador2Id)
+                                .FirstOrDefault();
+            }
+
             if (jogo == null)
             {
                 return NotFound();

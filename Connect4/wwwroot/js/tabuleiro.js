@@ -1,5 +1,4 @@
-﻿
-var tabuleiroDiv;
+﻿var tabuleiroDiv;
 var jogoId;
 
 //Função responsável por atualizar uma posição específica do tabuleiro no cliente.
@@ -17,6 +16,23 @@ function AtualizarPosicao(coluna, linha, valor) {
     }
 }
 
+//Função responsável por atualizar na tela qual o jogador atual.
+function AtualizarTurno(jogadorAtual) {
+    var jogador1 = document.querySelector("#jogador1")
+    var jogador2 = document.querySelector("#jogador2")
+    if (jogadorAtual == 1) {
+        jogador2.classList.remove('Turno')
+        jogador2.removeAttribute('style')
+        jogador1.setAttribute('style', 'background-image: radial-gradient(circle, yellow, yellow,orange)')
+        jogador1.classList.add('Turno')
+    } else if (jogadorAtual == 2) {
+        jogador1.classList.remove('Turno')
+        jogador1.removeAttribute('style')
+        jogador2.setAttribute('style', 'background-image: radial-gradient(circle, red, red,darkred);')
+        jogador2.classList.add('Turno')
+    }
+}
+
 //Esta função cria uma linha na Div do Tabuleiro.
 function CriarLinha(colunas) {
     var linha = document.createElement('div');
@@ -30,8 +46,6 @@ function CriarLinha(colunas) {
     }
     return linha;
 }
-
-
 
 //Esta função irá montar o tabuleiro, invocando a função criar 
 //linhas com o número de linhas existete no tabuleiro e 
@@ -65,7 +79,6 @@ function jogarServidor(jogoId, posicao) {
         + "&Pos=" + posicao;
     //Função que será invocada em uma modificação
     //no estado da chamada xhttp.
-
     tabuleiroDiv.classList.add("disabled");
     xhttp.onreadystatechange = function () {
         //estado da chamada xhttp. 4 Significa done.
@@ -87,7 +100,6 @@ function jogarServidor(jogoId, posicao) {
     //Envia a chamada.
     xhttp.send();
 }
-
 
 function obterJogoServidor(id) {
     //Faz uma chamada no servidor.
@@ -115,7 +127,6 @@ function obterJogoServidor(id) {
     xhttp.send();
 }
 
-
 //Função que monta um tabuleiro.
 function MontarTabuleiro(Tabuleiro) {
     tabuleiroObj = Tabuleiro;
@@ -137,9 +148,7 @@ function MontarTabuleiro(Tabuleiro) {
             jogarServidor(jogoId, this.id.substr(7));
         });
     }
-
-
-
+    AtualizarTurno(Tabuleiro.turno);
 }
 /*
 $(document).ready(function () {

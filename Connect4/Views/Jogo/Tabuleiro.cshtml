@@ -1,29 +1,34 @@
 ﻿@model Jogo
 
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<ApplicationUser> UserManager
+
 @{
     ViewData["Title"] = "Tabuleiro";
 }
 
 <h2>Tabuleiro</h2>
 <link rel="stylesheet" href="~/css/tabuleiro.css" />
-<h1>Connect-4</h1>
+<h1>Connect4</h1>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-6 Turno" style="padding: 5px; ">
-            Jogador 01
+    <div id="jogadores" class="row">
+        <div id="jogador1" class="col-md-6">
+            @Model.Jogador1.Nome
         </div>
-        <div class="col-md-6 Turno" style="padding: 5px; ">
-            Jogador 02
+        <div id="jogador2" class="col-md-6">
+            @Model.Jogador2.Nome
         </div>
     </div>
-</div>
 
+    <div class="foo red"/>
+
+</div>
 
 <!--O tabuleiro será montado dentro desta div, por meio da função
 que está no javascript: tabuleiro.js.-->
 <div style="margin: 15px" id="Tabuleiro" class="tabuleiro">
-
 
 </div>
 <!--Necessário estar em uma seção para garantir que o script
