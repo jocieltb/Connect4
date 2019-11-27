@@ -15,7 +15,7 @@ namespace Connect4.Models.AccountViewModels
         public string Nome { get; set; }
 
         [Required]
-        [MinLength(11), MaxLength(11)]
+        [Range(11, 11, ErrorMessage = "CPF Invalido, necessário 11 digitos")]
         [Display(Name = "CPF")]
         public string CPF { get; set; }
 
@@ -25,7 +25,7 @@ namespace Connect4.Models.AccountViewModels
 
         [Required]
         [Display(Name = "CEP")]
-        [MinLength(8), MaxLength(8)]
+        [Range(8, 8, ErrorMessage = "CEP Invalido, necessário 8 digitos")]
         public string CEP { get; set; }
 
         [Required]
