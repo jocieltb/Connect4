@@ -12,8 +12,8 @@ using System;
 namespace Connect4.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191126143839_v2")]
-    partial class v2
+    [Migration("20191127220022_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

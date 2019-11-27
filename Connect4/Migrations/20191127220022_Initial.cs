@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Connect4.Migrations
 {
-    public partial class v1 : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -103,9 +103,12 @@ namespace Connect4.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
+                    CEP = table.Column<string>(nullable: true),
+                    CPF = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
+                    Endereco = table.Column<string>(nullable: true),
                     JogadorId = table.Column<int>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
