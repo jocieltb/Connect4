@@ -18,7 +18,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="CPF"></label>
-                <input asp-for="CPF" class="form-control" />
+                <input asp-for="CPF" class="form-control cpf-mask" />
                 <span asp-validation-for="CPF" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -28,7 +28,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="CEP"></label>
-                <input asp-for="CEP" class="form-control" />
+                <input asp-for="CEP" class="form-control cep-mask" />
                 <span asp-validation-for="CEP" class="text-danger"></span>
             </div>
 
@@ -59,4 +59,8 @@
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript" src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="//assets.locaweb.com.br/locastyle/2.0.6/javascripts/locastyle.js"></script>
+   <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 }
