@@ -20,7 +20,7 @@ namespace Connect4.Models
         public String NomeTorneio { get; set; }
 
         [Display(Name = "Quantidade de Jogadores")]
-        [Range(4,16, ErrorMessage ="Quantidade de Jogadores do torneio deve ser entre 2 e 32 jogadores")]
+        [Range(4,16, ErrorMessage ="Quantidade de Jogadores do torneio deve ser entre 4 e 16 jogadores")]
         public int QuantidadeJogadores { get; set; }
 
         //Esta validação não é aconselhável. Existe como usá-la desabilitando a validação 

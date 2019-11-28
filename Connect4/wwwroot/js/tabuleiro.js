@@ -149,6 +149,14 @@ function MontarTabuleiro(Tabuleiro) {
         });
     }
     AtualizarTurno(Tabuleiro.turno);
+    //var resultado = Tabuleiro.vencedor;
+    //if (resultado == -1) {
+    //    alert("O jogo terminou empatado!")
+    //} else if (resultado == 1) {
+    //    alert("O jogador 1 venceu!")
+    //} else if (resultado == 2) {
+    //    alert("O jogador 2 venceu!")
+    //}
 }
 /*
 $(document).ready(function () {

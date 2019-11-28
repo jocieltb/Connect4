@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 using System;
 
@@ -143,6 +141,8 @@ namespace Connect4.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("InternalData");
+
+                    b.Property<int>("Resultado");
 
                     b.Property<int>("Turno");
 

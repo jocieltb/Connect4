@@ -17,8 +17,6 @@ namespace Connect4.Models
         public static int NUMERO_LINHAS = 6;
         private static int NUMERO_JOGADORES = 2;
 
-
-
         /// <summary>
         /// 
         /// </summary>
@@ -185,7 +183,6 @@ namespace Connect4.Models
             } while (++linha < RepresentacaoTabuleiro.GetLength(1));
             //throw new ArgumentException(
             //    $"A coluna {Posicao} está lotada.");
-            
         }
 
         public int VerificarVencedorLinha()
