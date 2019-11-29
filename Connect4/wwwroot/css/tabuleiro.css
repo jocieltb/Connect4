@@ -6,8 +6,14 @@ h1 {
     margin-bottom: 60px;
 }
 
-div.Turno {
-    border: 5px solid black;
+div.Turno1 {
+    border: 3px solid black;
+    background-image: radial-gradient(circle, yellow, yellow,orange)
+}
+div.Turno2 {
+    border: 3px solid black;
+    background-image: radial-gradient(circle, red, red,darkred);
+    color: white;
 }
 
 #jogadores {

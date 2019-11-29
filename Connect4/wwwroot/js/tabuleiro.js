@@ -21,15 +21,11 @@ function AtualizarTurno(jogadorAtual) {
     var jogador1 = document.querySelector("#jogador1")
     var jogador2 = document.querySelector("#jogador2")
     if (jogadorAtual == 1) {
-        jogador2.classList.remove('Turno')
-        jogador2.removeAttribute('style')
-        jogador1.setAttribute('style', 'background-image: radial-gradient(circle, yellow, yellow,orange)')
-        jogador1.classList.add('Turno')
+        jogador2.classList.remove('Turno2')
+        jogador1.classList.add('Turno1')
     } else if (jogadorAtual == 2) {
-        jogador1.classList.remove('Turno')
-        jogador1.removeAttribute('style')
-        jogador2.setAttribute('style', 'background-image: radial-gradient(circle, red, red,darkred);')
-        jogador2.classList.add('Turno')
+        jogador1.classList.remove('Turno1')
+        jogador2.classList.add('Turno2')
     }
 }
 
