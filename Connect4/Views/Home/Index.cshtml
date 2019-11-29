@@ -6,16 +6,16 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 
-<div><h1>Connect - 4</h1></div>
+<div>
+    <h1>Connect4</h1>
+</div>
 @if (SignInManager.IsSignedIn(User))
 {
     <a asp-area=""
        asp-controller="Jogo"
        asp-action="CriarJogo" class="btn btn-default">Jogar Amistoso</a>
-    
+
     <a asp-area=""
-       asp-controller="Jogo"
-       asp-action="CriarJogo" class="btn btn-default">Jogar Torneio</a>
+       asp-controller="Torneios"
+       asp-action="Index" class="btn btn-default">Jogar Torneio</a>
 }
-
-

@@ -35,6 +35,7 @@ namespace Connect4.Controllers
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            
         }
 
         [TempData]

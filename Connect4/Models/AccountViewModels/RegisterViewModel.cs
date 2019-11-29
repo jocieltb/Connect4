@@ -15,7 +15,7 @@ namespace Connect4.Models.AccountViewModels
         public string Nome { get; set; }
 
         [Required]
-        [MinLength(14, ErrorMessage = "CPF Invalido, necessário 11 digitos"), MaxLength(14, ErrorMessage = "CPF Invalido, necessário 11 digitos") ]
+        [MinLength(14, ErrorMessage = "CPF inválido, necessário 11 digitos"), MaxLength(14, ErrorMessage = "CPF inválido, necessário 11 digitos")]
         [Display(Name = "CPF")]
         public string CPF { get; set; }
 
@@ -25,9 +25,9 @@ namespace Connect4.Models.AccountViewModels
 
         [Required]
         [Display(Name = "CEP")]
-       
-        [MaxLength(9, ErrorMessage = "CEP Invalido, necessário 8 digitos")]
-        [MinLength(9, ErrorMessage = "CEP Invalido, necessário 8 digitos")]
+
+        [MaxLength(9, ErrorMessage = "CEP inválido, necessário 8 digitos")]
+        [MinLength(9, ErrorMessage = "CEP inválido, necessário 8 digitos")]
         public string CEP { get; set; }
 
         [Required]
@@ -39,8 +39,6 @@ namespace Connect4.Models.AccountViewModels
         [Required]
         [DataType(DataType.Date)]
         public DateTime Nascimento { get; set; }
-
-        
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
