@@ -18,5 +18,13 @@ namespace Connect4.Models
                 return "(Computador)" + NomeComputador;
             }
         }
+
+        public override string Email
+        {
+            get
+            {
+                return "(Computador)";
+            }
+        }
     }
 }

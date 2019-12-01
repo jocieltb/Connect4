@@ -22,5 +22,17 @@ namespace Connect4.Models
                 return Usuario.Nome;
             }
         }
+
+        public override string Email
+        {
+            get
+            {
+                if (Usuario == null)
+                {
+                    return "E-mail não recuperado";
+                }
+                return Usuario.Email;
+            }
+        }
     }
 }

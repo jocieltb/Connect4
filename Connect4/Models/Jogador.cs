@@ -10,5 +10,7 @@ namespace Connect4.Models
         public int Id { get; set; }
 
         public abstract String Nome { get; }
+
+        public abstract String Email { get; }
     }
 }
