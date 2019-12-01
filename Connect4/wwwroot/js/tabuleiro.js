@@ -9,11 +9,12 @@ function AtualizarPosicao(coluna, linha, valor) {
 
     posicaoDiv.classList.remove('Jogador1');
     posicaoDiv.classList.remove('Jogador2');
-    if (valor == 1) {
+    if (valor == 1){
         posicaoDiv.classList.add('Jogador1');
     } else if (valor == 2) {
         posicaoDiv.classList.add('Jogador2');
     }
+    
 }
 
 //Função responsável por atualizar na tela qual o jogador atual.
@@ -23,9 +24,12 @@ function AtualizarTurno(jogadorAtual) {
     if (jogadorAtual == 1) {
         jogador2.classList.remove('Turno2')
         jogador1.classList.add('Turno1')
+       
+        
     } else if (jogadorAtual == 2) {
         jogador1.classList.remove('Turno1')
         jogador2.classList.add('Turno2')
+        
     }
 }
 
@@ -86,6 +90,7 @@ function jogarServidor(jogoId, posicao) {
                 window.location.replace(this.responseURL);
             }
             //Se o estado é 200 e a resposta não é nula montar o tabuleiro.
+
             if (this.status == 200) {
                 MontarTabuleiro(this.response);
             }
@@ -144,7 +149,13 @@ function MontarTabuleiro(Tabuleiro) {
             jogarServidor(jogoId, this.id.substr(7));
         });
     }
+    
     AtualizarTurno(Tabuleiro.turno);
+    alert(`${this.id.substr(7)}`)
+
+    
+    
+
     //var resultado = Tabuleiro.vencedor;
     //if (resultado == -1) {
     //    alert("O jogo terminou empatado!")

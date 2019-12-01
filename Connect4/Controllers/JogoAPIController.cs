@@ -93,9 +93,13 @@ namespace Connect4.Controllers
         {
             var jogo = _context.Jogos
                 .Include(j => j.Tabuleiro)
+                .Include(j => j.Jogador1)
+                .Include(j => j.Jogador2)
                 .Where(j => j.Id == JogoId)
                 .FirstOrDefault();
-            if(jogo == null)
+
+            
+            if (jogo == null)
             {
                 return NotFound();
             }
@@ -107,9 +111,43 @@ namespace Connect4.Controllers
             //Verificar se ele é o jogador 1 ou 2.
             //Verificar se ele pode fazer a jogada.
             //Por último executar a jogada ou exceção.
-            jogo.Tabuleiro.Jogar(jogo.Tabuleiro.Turno, Pos);
-            _context.SaveChanges();
-            return Ok(jogo.Tabuleiro);
+
+            //Verifica se o id passado via parâmetro existe no banco de dados.
+            if (jogo.Jogador1 is JogadorPessoa)
+            {
+                //Caso seja, será necessário recuperar 
+                //Jogador.Usuário, para recuperar o nome do Jogador.
+                jogo.Jogador1 = _context.JogadorPessoas
+                                .Include(j => j.Usuario)
+                                .Where(j => j.Id == jogo.Jogador1Id)
+                                .FirstOrDefault();
+            }
+            if (jogo.Jogador2 is JogadorPessoa)
+            {
+                jogo.Jogador2 = _context.JogadorPessoas
+                                .Include(j => j.Usuario)
+                                .Where(j => j.Id == jogo.Jogador2Id)
+                                .FirstOrDefault();
+            }
+
+           
+            if (User.Identity.Name == jogo.Jogador1.Email && jogo.Tabuleiro.Turno == 1)
+            {
+                jogo.Tabuleiro.Jogar(jogo.Tabuleiro.Turno, Pos);
+                _context.SaveChanges();
+                return Ok(jogo.Tabuleiro);
+            } 
+            else if (User.Identity.Name == jogo.Jogador2.Email && jogo.Tabuleiro.Turno == 2)
+            {
+                jogo.Tabuleiro.Jogar(jogo.Tabuleiro.Turno, Pos);
+                _context.SaveChanges();
+                return Ok(jogo.Tabuleiro);
+            }
+            else
+            {
+                throw new ApplicationException("Não é sua vez de jogar");
+            }
+            
         }
     }
 }
