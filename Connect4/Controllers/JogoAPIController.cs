@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Connect4.Data;
@@ -145,9 +146,29 @@ namespace Connect4.Controllers
             }
             else
             {
-                throw new ApplicationException("Não é sua vez de jogar");
+                //  throw new ApplicationException("Não é sua vez de jogar");
+
+                // return RedirectToAction(nameof(Error), new { message = "Não é a sua vez de jogar" });
+
+
+
+              
             }
             
+        }
+
+
+
+        public IActionResult Error(string message)
+        {
+
+            var ViewModel = new ErrorViewModel
+            {
+                message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+
+            };
+            return View(ViewModel);
         }
     }
 }

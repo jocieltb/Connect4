@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Connect4.Models
 {
@@ -13,6 +14,7 @@ namespace Connect4.Models
     {
         public String Nome { get; set; }
 
+        [Remote("ValidarCPFUnico", "ApplicationUser", HttpMethod = "POST", ErrorMessage = "CPF já cadastrado")]
         public String CPF { get; set; }
 
         public String Endereco { get; set; }
