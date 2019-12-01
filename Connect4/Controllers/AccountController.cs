@@ -254,11 +254,11 @@ namespace Connect4.Controllers
             return View(model);
         }
 
-        public ActionResult ValidarCPFUnico(string CPF)
-        {
-            var CPFDisponivel = ApplicationUser.Where(c => c.CPF == CPF).Count() == 0;
-            return Json(CPFDisponivel,);
-        }
+        //public ActionResult ValidarCPFUnico(string CPF)
+        //{
+        //    var CPFDisponivel = ApplicationUser.Where(c => c.CPF == CPF).Count() == 0;
+        //    return Json(CPFDisponivel,);
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -442,6 +442,7 @@ namespace Connect4.Controllers
             return View();
         }
 
+        [HttpGet]
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ResetPasswordConfirmation()
