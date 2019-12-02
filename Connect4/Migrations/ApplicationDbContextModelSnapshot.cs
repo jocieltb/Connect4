@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 using System;
 
@@ -107,26 +105,6 @@ namespace Connect4.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Jogador");
                 });
 
-            modelBuilder.Entity("Connect4.Models.JogadorResultados", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("JogadorId");
-
-                    b.Property<int>("Pontos");
-
-                    b.Property<int?>("TorneioId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("JogadorId");
-
-                    b.HasIndex("TorneioId");
-
-                    b.ToTable("JogadorResultados");
-                });
-
             modelBuilder.Entity("Connect4.Models.Jogo", b =>
                 {
                     b.Property<int>("Id")
@@ -163,6 +141,8 @@ namespace Connect4.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("InternalData");
+
+                    b.Property<int>("Resultado");
 
                     b.Property<int>("Turno");
 
@@ -333,17 +313,6 @@ namespace Connect4.Migrations
                 {
                     b.HasOne("Connect4.Models.Torneio")
                         .WithMany("Jogadores")
-                        .HasForeignKey("TorneioId");
-                });
-
-            modelBuilder.Entity("Connect4.Models.JogadorResultados", b =>
-                {
-                    b.HasOne("Connect4.Models.Jogador", "Jogador")
-                        .WithMany()
-                        .HasForeignKey("JogadorId");
-
-                    b.HasOne("Connect4.Models.Torneio", "Torneio")
-                        .WithMany()
                         .HasForeignKey("TorneioId");
                 });
 

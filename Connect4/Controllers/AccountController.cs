@@ -13,7 +13,6 @@ using Microsoft.Extensions.Options;
 using Connect4.Models;
 using Connect4.Models.AccountViewModels;
 using Connect4.Services;
-using Connect4.Data;
 
 namespace Connect4.Controllers
 {
@@ -25,7 +24,7 @@ namespace Connect4.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
-        private ApplicationDbContext _context { get; set; }
+
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
@@ -214,9 +213,6 @@ namespace Connect4.Controllers
             return View();
         }
 
-
-
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -252,12 +248,6 @@ namespace Connect4.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
-        }
-
-        public ActionResult ValidarCPFUnico(string CPF)
-        {
-            var CPFDisponivel = ApplicationUser.Where(c => c.CPF == CPF).Count() == 0;
-            return Json(CPFDisponivel,);
         }
 
         [HttpPost]
