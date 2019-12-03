@@ -17,6 +17,7 @@ namespace Connect4.Models.AccountViewModels
         [Required]
         [MinLength(14, ErrorMessage = "CPF inválido, necessário 11 digitos"), MaxLength(14, ErrorMessage = "CPF inválido, necessário 11 digitos")]
         [Display(Name = "CPF")]
+        
         public string CPF { get; set; }
 
         [Required]

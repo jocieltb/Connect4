@@ -13,6 +13,9 @@ namespace Connect4.Models.ManageViewModels
         [Display(Name = "Nome")]
         public String Nome { get; set; }
 
+        [Display(Name = "CPF")]
+        public String CPF { get; set; }
+
         [Display(Name = "Data de Nascimento")]
         [DataType(DataType.Date)]
         public DateTime Nascimento { get; set; }
