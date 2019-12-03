@@ -20,9 +20,10 @@
         <div id="jogador2" class="col-md-6">
             @Model.Jogador2.Nome
         </div>
+
     </div>
 
-    <div class="foo red"/>
+    <div class="foo red" />
 
 </div>
 
@@ -30,6 +31,10 @@
 que está no javascript: tabuleiro.js.-->
 <div style="margin: 15px" id="Tabuleiro" class="tabuleiro">
 
+</div>
+
+<div class="col-md-12">
+    <a asp-action="Lobby" class="btn btn-default">Lobby</a>
 </div>
 <!--Necessário estar em uma seção para garantir que o script
 esteja após a importação do jquery.-->
@@ -46,7 +51,11 @@ esteja após a importação do jquery.-->
         }, 1000
 
         )
-        
+
     </script>
+
+
 }
+
+
 
