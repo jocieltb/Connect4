@@ -13,6 +13,7 @@ namespace Connect4.Models
     {
         public String Nome { get; set; }
 
+
         public String CPF { get; set; }
 
         public String Endereco { get; set; }
