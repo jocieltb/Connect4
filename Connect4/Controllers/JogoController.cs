@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Connect4.Controllers
 {
     /// <summary>
@@ -47,6 +48,7 @@ namespace Connect4.Controllers
         /// <returns></returns>
         public IActionResult Tabuleiro(int id)
         {
+
             //Recupera Jogo do banco de dados.
             //Repare que a inclusão de j.Jogador1, não trará
             //j.Jogador1.Usuario, ver na ação de Lobby como fazer.
@@ -85,8 +87,14 @@ namespace Connect4.Controllers
                 jogo.Tabuleiro = new Tabuleiro();
                 _context.SaveChanges();
             }
+
+
+            
+
             return View(jogo);
         }
+
+        
 
         /// <summary>
         /// Lobby é uma sala de espera antes de iniciar o jogo.

@@ -84,12 +84,11 @@ function jogarServidor(jogoId, posicao) {
         //estado da chamada xhttp. 4 Significa done.
         if (this.readyState == 4) {
             tabuleiroDiv.classList.remove("disabled");
-            //Se a resposta for nula significa que algo falhou.
-            if (this.response == null &&
-                this.responseURL != "") {
-                window.location.replace(this.responseURL);
-            }
             //Se o estado é 200 e a resposta não é nula montar o tabuleiro.
+
+            if (this.status == 500) {
+                alert("Não é sua vez de jogar")
+            }
 
             if (this.status == 200) {
                 MontarTabuleiro(this.response);
@@ -146,24 +145,22 @@ function MontarTabuleiro(Tabuleiro) {
     //Adiciona um evento para no caso de ser clicado um dos espaços realizar uma jogada.    
     for (coluna = 0; coluna < TamanhoColunas; coluna++) {
         $("#posCol-" + coluna).click(function () {
+
             jogarServidor(jogoId, this.id.substr(7));
         });
     }
     
     AtualizarTurno(Tabuleiro.turno);
-    alert(`${this.id.substr(7)}`)
-
+      
     
-    
-
-    //var resultado = Tabuleiro.vencedor;
-    //if (resultado == -1) {
-    //    alert("O jogo terminou empatado!")
-    //} else if (resultado == 1) {
-    //    alert("O jogador 1 venceu!")
-    //} else if (resultado == 2) {
-    //    alert("O jogador 2 venceu!")
-    //}
+    var resultado = Tabuleiro.resultado;
+    if (resultado == -1) {
+    alert("O jogo terminou empatado!")
+    } else if (resultado == 1) {
+        alert("O jogador 1 venceu!")
+    } else if (resultado == 2) {
+        alert("O jogador 2 venceu!")
+    }
 }
 /*
 $(document).ready(function () {
