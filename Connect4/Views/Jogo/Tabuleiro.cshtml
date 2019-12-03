@@ -40,6 +40,13 @@ esteja após a importação do jquery.-->
         jogoId = "@Model.Id";
         //Requer o jogo do servidor.
         obterJogoServidor(jogoId);
+
+        setInterval(function () {
+            obterJogoServidor(jogoId)
+        }, 1000
+
+        )
+        
     </script>
 }
 

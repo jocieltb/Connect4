@@ -259,3 +259,7 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Connect4/Migrations/20191202231349_v1.cs
+/Connect4/Migrations/20191202231349_v1.Designer.cs
+/Connect4/Migrations/20191202231926_v2.cs
+/Connect4/Migrations/20191202231926_v2.Designer.cs

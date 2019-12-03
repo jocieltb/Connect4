@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc.Razor.Internal;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -97,6 +98,10 @@ namespace Connect4.Models
         /// <returns>Retorna 1 caso o jogador 1 vença,
         /// 2 caso o jogador 2 vença, -1 caso seja empate e 0
         /// caso o jogo ainda não tenha terminado.</returns>
+        /// 
+        public int Resultado { get { return Vencedor(); } }
+
+       
         public int Vencedor()
         {
             int vencedor = 0;

@@ -145,7 +145,7 @@ namespace Connect4.Controllers
             }
             else
             {
-                throw new ApplicationException("Não é sua vez de jogar");
+                throw new ArgumentException("Não é sua vez de jogar");
             }
             
         }
