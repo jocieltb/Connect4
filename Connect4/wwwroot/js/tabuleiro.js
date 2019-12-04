@@ -127,6 +127,7 @@ function obterJogoServidor(id) {
     xhttp.send();
 }
 
+var resultado = 0;
 //Função que monta um tabuleiro.
 function MontarTabuleiro(Tabuleiro) {
     tabuleiroObj = Tabuleiro;
@@ -153,13 +154,16 @@ function MontarTabuleiro(Tabuleiro) {
     AtualizarTurno(Tabuleiro.turno);
       
     
-    var resultado = Tabuleiro.resultado;
+    resultado = Tabuleiro.resultado;
     if (resultado == -1) {
-    alert("O jogo terminou empatado!")
+        alert("O jogo terminou empatado!")
+        javascript: history.back()
     } else if (resultado == 1) {
         alert("O jogador 1 venceu!")
+        javascript: history.back()
     } else if (resultado == 2) {
         alert("O jogador 2 venceu!")
+        javascript: history.back()
     }
 }
 /*
