@@ -24,10 +24,9 @@ namespace Connect4.Controllers
 
         private SignInManager<ApplicationUser> _signInManager { get; set; }
 
-
         public JogoController(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager, 
+            SignInManager<ApplicationUser> signInManager,
             ApplicationDbContext dbContext)
         {
             this._context = dbContext;
@@ -87,14 +86,8 @@ namespace Connect4.Controllers
                 jogo.Tabuleiro = new Tabuleiro();
                 _context.SaveChanges();
             }
-
-
-            
-
             return View(jogo);
         }
-
-        
 
         /// <summary>
         /// Lobby é uma sala de espera antes de iniciar o jogo.
@@ -113,7 +106,7 @@ namespace Connect4.Controllers
                 .Where(j => j.Id == id)
                 .Select(j => j)
                 .FirstOrDefault();
-            
+
             if (jogo == null)
             {
                 return NotFound();
@@ -138,8 +131,9 @@ namespace Connect4.Controllers
             }
             int? jogadorId =
             _userManager.GetUserAsync(User).Result.JogadorId;
-            if(!(jogadorId == jogo.Jogador1Id || 
-                jogadorId == jogo.Jogador2Id)){
+            if (!(jogadorId == jogo.Jogador1Id ||
+                jogadorId == jogo.Jogador2Id))
+            {
                 return Forbid();
             }
             return View(jogo);
@@ -157,7 +151,7 @@ namespace Connect4.Controllers
             Jogo jogo;
             int? jogadorId =
                 _userManager.GetUserAsync(User).Result.JogadorId;
-            if(jogadorId == null)
+            if (jogadorId == null)
             {
                 throw new ApplicationException("O usuário atual não é um jogador.");
             }
@@ -167,32 +161,87 @@ namespace Connect4.Controllers
                 return NotFound();
             }
             //Verificar se existe jogo com um jogador
-            jogo = (from item in _context.Jogos.Include(j=> j.Jogador1)
+            jogo = (from item in _context.Jogos.Include(j => j.Jogador1)
                                                .Include(j => j.Jogador2)
                     where (item.Jogador1 == null ||
                          item.Jogador2 == null) &&
                          (item.Jogador1 != jogadorAtual &&
-                         item.Jogador2!= jogadorAtual)
+                         item.Jogador2 != jogadorAtual)
                     select item).FirstOrDefault();
-            if (jogo != null) {
+            if (jogo != null)
+            {
                 if (jogo.Jogador1 == null)
                 {
                     jogo.Jogador1 = jogadorAtual;
-                }else if(jogo.Jogador2 == null)
+                }
+                else if (jogo.Jogador2 == null)
                 {
                     jogo.Jogador2 = jogadorAtual;
                 }
             }
             //Caso contrário
-            else {
+            else
+            {
                 jogo = new Jogo();
                 jogo.Jogador1 = jogadorAtual;
                 _context.Add(jogo);
             }
             _context.SaveChanges();
             //Redirecionar para Lobby
-            return RedirectToAction(nameof(Lobby), 
+            return RedirectToAction(nameof(Lobby),
                 new { id = jogo.Id });
+        }
+
+        [Authorize]
+        public IActionResult ContinuarJogo()
+        {
+            JogadorPessoa JogadorPessoa;
+            List<Jogo> Jogos;
+            int? JogadorId = _userManager.GetUserAsync(User).Result.JogadorId;
+            if (JogadorId == null)
+            {
+                throw new ApplicationException("O usuário atual é inválido!");
+            }
+            Jogos = (from item in _context.Jogos.Include(j => j.Tabuleiro)
+                                                .Include(j => j.Jogador1)
+                                                .Include(j => j.Jogador2)
+                     where (item.Jogador1Id != null || item.Jogador2Id != null)
+                     select item).ToList();
+            JogadorPessoa = _context.JogadorPessoas.Find(JogadorId);
+            JogadorPessoa.Jogos = Jogos;
+            var ListaJogos = new List<Jogo>();
+            foreach (var jogo in JogadorPessoa.Jogos)
+            {
+                Jogo Jogo = null;
+                Jogo = _context.Jogos.Include(j => j.Jogador1)
+                                             .Include(j => j.Jogador2)
+                                             .Include(j => j.Tabuleiro)
+                                             .Where(j => j.Id == jogo.Id)
+                                             .Select(j => j)
+                                             .FirstOrDefault();
+                ListaJogos.Add(Jogo);
+                if (Jogo.Jogador1 is JogadorPessoa)
+                {
+                    Jogo.Jogador1 = _context.JogadorPessoas
+                                    .Include(j => j.Usuario)
+                                    .Where(j => j.Id == Jogo.Jogador1Id)
+                                    .FirstOrDefault();
+                }
+
+                if (Jogo.Jogador2 is JogadorPessoa)
+                {
+                    Jogo.Jogador2 = _context.JogadorPessoas
+                                    .Include(j => j.Usuario)
+                                    .Where(j => j.Id == Jogo.Jogador2Id)
+                                    .FirstOrDefault();
+                }
+            }
+            if (ListaJogos.Any())
+            {
+                JogadorPessoa.Jogos = ListaJogos;
+                return View(JogadorPessoa);
+            }
+            return NotFound("Não há jogos em andamento!");
         }
     }
 }
