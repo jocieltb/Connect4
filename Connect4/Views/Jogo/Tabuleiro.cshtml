@@ -20,11 +20,8 @@
         <div id="jogador2" class="col-md-6">
             @Model.Jogador2.Nome
         </div>
-
     </div>
-
     <div class="foo red" />
-
 </div>
 
 <!--O tabuleiro será montado dentro desta div, por meio da função
@@ -34,8 +31,11 @@ que está no javascript: tabuleiro.js.-->
 </div>
 
 <div class="col-md-12">
-    <a asp-action="Lobby" class="btn btn-default">Lobby</a>
+    <a asp-area="" asp-controller="Jogo"
+       asp-action="Lobby"
+       asp-route-id="@Model.Id" class="btn btn-default">Lobby</a>
 </div>
+
 <!--Necessário estar em uma seção para garantir que o script
 esteja após a importação do jquery.-->
 @section Scripts{
@@ -45,19 +45,11 @@ esteja após a importação do jquery.-->
         jogoId = "@Model.Id";
         //Requer o jogo do servidor.
         obterJogoServidor(jogoId);
-
         
         setInterval(function () {
             obterJogoServidor(jogoId)
         }, 1000
         )
        
-        
-
     </script>
-
-
 }
-
-
-
