@@ -29,38 +29,42 @@
     <tbody>
         @foreach (var item in Model.Jogos)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @if (SignInManager.IsSignedIn(User))
-                    {
-                        @Html.DisplayFor(modelItem => item.Jogador1.Nome)
-                    }
-                </td>
-                <td>
-                    @if (SignInManager.IsSignedIn(User))
-                    {
-                        @Html.DisplayFor(modelItem => item.Jogador2.Nome)
-                    }
-
-                </td>
-                <td>
-                    @if (SignInManager.IsSignedIn(User))
-                    {
-                        @if (item.Jogador2Id.HasValue)
+            @if (SignInManager.IsSignedIn(User) &&
+                 User.Identity.Name == item.Jogador1.Email || User.Identity.Name == item.Jogador2.Email)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @if (SignInManager.IsSignedIn(User))
                         {
-                            @if (item.Tabuleiro.Resultado == 0)
+                            @Html.DisplayFor(modelItem => item.Jogador1.Nome)
+                        }
+                    </td>
+                    <td>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            @Html.DisplayFor(modelItem => item.Jogador2.Nome)
+                        }
+
+                    </td>
+                    <td>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            @if (item.Jogador2Id.HasValue)
                             {
-                                <a asp-area="" asp-controller="Jogo"
-                                   asp-action="Tabuleiro"
-                                   asp-route-id="@item.Id" class="btn btn-default">Continuar</a>
+                                @if (item.Tabuleiro.Resultado == 0)
+                                {
+                                    <a asp-area="" asp-controller="Jogo"
+                                       asp-action="Tabuleiro"
+                                       asp-route-id="@item.Id" class="btn btn-default">Continuar</a>
+                                }
                             }
                         }
-                    }
-                </td>
-            </tr>
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>

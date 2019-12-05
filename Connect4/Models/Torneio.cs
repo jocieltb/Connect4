@@ -12,7 +12,7 @@ namespace Connect4.Models
 
         public IList<Jogador> Jogadores { get; set; } = new List<Jogador>();
 
-        public IList<Jogo> Jogos { get; set; }
+        public IList<Jogo> Jogos { get; set; } = new List<Jogo>();
 
         [Display(Name ="Nome")]
         //Expressão regular. Primeira letra maíscula depois letras, números, espaços e '-'.

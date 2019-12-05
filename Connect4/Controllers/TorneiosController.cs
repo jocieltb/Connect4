@@ -136,18 +136,18 @@ namespace Connect4.Controllers
                 
                 int i = 0;
                 int j = 0;
-                int cont = 0;
+                //int cont = 0;
                 
                 for (i = 0; i < torneio.QuantidadeJogadores - 1; i++)
                 {
-
                     for (j = 0; j < (torneio.QuantidadeJogadores - 1) - i; j++)
                     {
-                        torneio.Jogos[cont].Jogador1 = torneio.Jogadores[i];
-                        torneio.Jogos[cont].Jogador2 = torneio.Jogadores[j + i + 1];
-                        cont++;
-
-                       // Console.WriteLine("Jogador " + (i) + " vs Jogador " + (j + i + 1));
+                        Jogo Jogo = new Jogo();
+                        Jogo.Jogador1 = torneio.Jogadores[i];
+                        Jogo.Jogador2 = torneio.Jogadores[j + i + 1];
+                        torneio.Jogos.Add(Jogo);
+                        _context.Add(Jogo);
+                        //cont++;
                     }
                     j = 0;
                 }

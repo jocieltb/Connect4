@@ -20,6 +20,6 @@ namespace Connect4.Models
 
         [ForeignKey("Tabuleiro")]
         public int? TabuleiroId { get; set; }
-        public Tabuleiro Tabuleiro { get; set; }
+        public Tabuleiro Tabuleiro { get; set; } = new Tabuleiro();
     }
 }
