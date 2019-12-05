@@ -130,6 +130,24 @@ namespace Connect4.Controllers
                 torneio.Jogadores.Add(item);
             }
             _context.SaveChanges();
+
+            if(torneio.QuantidadeJogadores == torneio.Jogadores.Count())
+            {
+                //var QuantidadeJogadores = 4;
+                //int i = 0;
+                //int j = 0;
+                //for (i = 0; i < QuantidadeJogadores - 1; i++)
+                //{
+
+                //    for (j = 0; j < QuantidadeJogadores - 1 - i; j++)
+                //    {
+
+                //        Console.WriteLine("Jogador " + (i + 1) + " vs Jogador " + (j + i + 2));
+                //    }
+                //    j = 0;
+                //}
+            }
+
             return View();
         }
 
