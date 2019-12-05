@@ -5,17 +5,20 @@
 h1 {
     margin-bottom: 60px;
 }
-
-div.Turno1 {
+div.Borda {
     border: 3px solid black;
+}
+div.Turno1 {
     background-image: radial-gradient(circle, yellow, yellow,orange)
 }
 div.Turno2 {
-    border: 3px solid black;
     background-image: radial-gradient(circle, red, red,darkred);
     color: white;
 }
-
+div.Jogadas {
+    background-image: radial-gradient(circle, white, white,#808080);
+    margin:5px;
+}
 #jogadores {
     padding: 5px;
     font-weight: bolder;
