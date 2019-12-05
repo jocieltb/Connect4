@@ -153,7 +153,7 @@ namespace Connect4.Controllers
                 }
             }
             _context.SaveChanges();
-            return View();
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Torneios/Edit/5
