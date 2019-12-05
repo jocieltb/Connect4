@@ -18,6 +18,8 @@ namespace Connect4.Models
         public static int NUMERO_LINHAS = 6;
         private static int NUMERO_JOGADORES = 2;
 
+        public int QtdJogadas{get;set;}
+
         /// <summary>
         /// 
         /// </summary>
@@ -70,6 +72,9 @@ namespace Connect4.Models
         public void AlternaTurno()
         {
             this.Turno = (this.Turno % NUMERO_JOGADORES) + 1;
+
+            QtdJogadas++;
+
         }
         public Tabuleiro()
         {

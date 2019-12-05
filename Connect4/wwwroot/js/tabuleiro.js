@@ -152,7 +152,8 @@ function MontarTabuleiro(Tabuleiro) {
     }
     
     AtualizarTurno(Tabuleiro.turno);
-      
+
+    document.getElementById("jogadas").innerHTML = `Jogadas: ${Tabuleiro.qtdJogadas}`
     
     resultado = Tabuleiro.resultado;
     if (resultado == -1) {
