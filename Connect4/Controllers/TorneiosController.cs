@@ -133,21 +133,26 @@ namespace Connect4.Controllers
 
             if(torneio.QuantidadeJogadores == torneio.Jogadores.Count())
             {
-                //var QuantidadeJogadores = 4;
-                //int i = 0;
-                //int j = 0;
-                //for (i = 0; i < QuantidadeJogadores - 1; i++)
-                //{
+                
+                int i = 0;
+                int j = 0;
+                int cont = 0;
+                
+                for (i = 0; i < torneio.QuantidadeJogadores - 1; i++)
+                {
 
-                //    for (j = 0; j < QuantidadeJogadores - 1 - i; j++)
-                //    {
+                    for (j = 0; j < (torneio.QuantidadeJogadores - 1) - i; j++)
+                    {
+                        torneio.Jogos[cont].Jogador1 = torneio.Jogadores[i];
+                        torneio.Jogos[cont].Jogador2 = torneio.Jogadores[j + i + 1];
+                        cont++;
 
-                //        Console.WriteLine("Jogador " + (i + 1) + " vs Jogador " + (j + i + 2));
-                //    }
-                //    j = 0;
-                //}
+                       // Console.WriteLine("Jogador " + (i) + " vs Jogador " + (j + i + 1));
+                    }
+                    j = 0;
+                }
             }
-
+            _context.SaveChanges();
             return View();
         }
 
