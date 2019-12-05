@@ -72,7 +72,12 @@
 
             </td>
             <td>
-
+                @if (SignInManager.IsSignedIn(User) &&
+                 User.Identity.Name == item.Dono)
+                {
+                    <a asp-action="SelecionarJogadores" asp-route-id="@item.Id">Selecionar Jogadores</a>
+                    <span>|</span>
+                }
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>

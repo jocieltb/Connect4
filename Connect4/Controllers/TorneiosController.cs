@@ -130,7 +130,7 @@ namespace Connect4.Controllers
                 torneio.Jogadores.Add(item);
             }
             _context.SaveChanges();
-            return View(viewModel);
+            return View();
         }
 
         // POST: Torneios/Edit/5
