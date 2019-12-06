@@ -57,7 +57,7 @@ namespace Connect4.Controllers
 
             if (torneio.Id != 0)
             {
-                ViewBag.mensagem = "Modo Torneio";
+                  ViewBag.mensagem = "Modo Torneio";
             }
             if (torneio.Id == 0)
             {

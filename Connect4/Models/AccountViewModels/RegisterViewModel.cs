@@ -40,6 +40,7 @@ namespace Connect4.Models.AccountViewModels
         [Display(Name = "Data de Nascimento")]
         [Required]
         [MinIdade(18, ErrorMessage ="Precisa ter 18 anos para se cadastrar")]
+        [MaxIdade(120, ErrorMessage = "Você é muito velho para esse jogo")]
         [DataType(DataType.Date)]
         public DateTime Nascimento { get; set; }
 
