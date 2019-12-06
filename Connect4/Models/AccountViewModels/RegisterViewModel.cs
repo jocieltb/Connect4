@@ -22,6 +22,7 @@ namespace Connect4.Models.AccountViewModels
 
         [Required]
         [Display(Name = "Endereco")]
+       
         public string Endereco { get; set; }
 
         [Required]
@@ -38,6 +39,7 @@ namespace Connect4.Models.AccountViewModels
 
         [Display(Name = "Data de Nascimento")]
         [Required]
+        [MinIdade(18, ErrorMessage ="Precisa ter 18 anos para se cadastrar")]
         [DataType(DataType.Date)]
         public DateTime Nascimento { get; set; }
 
