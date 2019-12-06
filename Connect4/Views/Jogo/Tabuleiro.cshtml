@@ -8,52 +8,55 @@
     ViewData["Title"] = "Tabuleiro";
 }
 
-<h2>Tabuleiro</h2>
 <link rel="stylesheet" href="~/css/tabuleiro.css" />
-<h1>Connect4 - @ViewBag.mensagem</h1>
-
 
 <div class="container">
-    <div id="jogadores" class="row">
-        <div id="jogador1" class="Borda col-md-5">
-            @Model.Jogador1.Nome
+    <div id="top">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Tabuleiro</h2>
+            </div>
         </div>
-        <div id="jogadas" class="Borda Jogadas col-md-2" >
-            Jogadas: 0
-        </div>
-        <div id="jogador2" class="Borda col-md-5">
-            @Model.Jogador2.Nome
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Connect4 - @ViewBag.mensagem</h1>
+            </div>
         </div>
     </div>
-    <div class="foo red" />
-</div>
+        <div id="jogadores" class="row">
+            <div id="jogador1" class="Borda col-md-5">
+                @Model.Jogador1.Nome
+            </div>
+            <div id="jogadas" class="Borda Jogadas col-md-2">
+                Jogadas: 0
+            </div>
+            <div id="jogador2" class="Borda col-md-5">
+                @Model.Jogador2.Nome
+            </div>
+        </div>
+        <div class="foo red" />
+    </div>
 
-<!--O tabuleiro será montado dentro desta div, por meio da função
-que está no javascript: tabuleiro.js.-->
-<div style="margin: 15px" id="Tabuleiro" class="tabuleiro">
+    <!--O tabuleiro será montado dentro desta div, por meio da função
+    que está no javascript: tabuleiro.js.-->
+    <div style="margin: 15px" id="Tabuleiro" class="tabuleiro">
 
-</div>
+    </div>
 
-<div class="col-md-12">
-    <a asp-area="" asp-controller="Jogo"
-       asp-action="Lobby"
-       asp-route-id="@Model.Id" class="btn btn-default">Lobby</a>
-</div>
-
-<!--Necessário estar em uma seção para garantir que o script
-esteja após a importação do jquery.-->
-@section Scripts{
-    <script src="~/js/tabuleiro.js"></script>
-    <script>
+    <!--Necessário estar em uma seção para garantir que o script
+    esteja após a importação do jquery.-->
+    @section Scripts{
+        <script src="~/js/tabuleiro.js"></script>
+        <script>
         //Obtem o ID do Jogo que está no objeto de modelo enviado pela controller.
         jogoId = "@Model.Id";
         //Requer o jogo do servidor.
         obterJogoServidor(jogoId);
-        
+
         setInterval(function () {
             obterJogoServidor(jogoId)
         }, 1000
         )
-            
-    </script>
-}
+
+        </script>
+    }

@@ -3,7 +3,7 @@
 }
 
 h1 {
-    margin-bottom: 60px;
+    margin-bottom: 30px;
 }
 div.Borda {
     border: 3px solid black;
@@ -83,4 +83,9 @@ div.Jogador1 {
 
 div.Jogador2 {
     background-image: radial-gradient(circle, red, red,darkred);
+}
+
+#top {
+    background-image: radial-gradient(circle, white, white,#808080);
+    margin-top: 10px;
 }
