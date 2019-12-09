@@ -178,6 +178,17 @@ namespace Connect4.Controllers
                         _context.Add(Jogo);
                     }
                 }
+                for (int i = 0; i < torneio.QuantidadeJogadores - 1; i++)
+                {
+                    for (int j = 0; j < (torneio.QuantidadeJogadores - 1) - i; j++)
+                    {
+                        Jogo Jogo = new Jogo();
+                        Jogo.Jogador1 = torneio.Jogadores[j + i + 1];
+                        Jogo.Jogador2 = torneio.Jogadores[i];
+                        torneio.Jogos.Add(Jogo);
+                        _context.Add(Jogo);
+                    }
+                }
             }
             for (int i = 0; i < torneio.QuantidadeJogadores; i++)
             {
