@@ -105,6 +105,16 @@ namespace Connect4.Controllers
             {
                 jogadorResultados = _context.JogadorResultados.Include(j => j.Jogador).Where(j => j.Torneio.Id == id).ToList();
             }
+            foreach (var item in jogadorResultados)
+            {
+                if(item.Jogador is JogadorPessoa)
+                {
+                    item.Jogador = _context.JogadorPessoas
+                                .Include(j => j.Usuario)
+                                .Where(j => j.Id == item.Jogador.Id)
+                                .FirstOrDefault();
+                }
+            }
             ViewBag.JogadorResultados = jogadorResultados;
             return View(jogadorResultados);
         }
