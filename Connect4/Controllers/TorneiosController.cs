@@ -95,7 +95,7 @@ namespace Connect4.Controllers
 
         public IActionResult JogadorResultados(int id)
         {
-            var torneio = _context.Torneio.Include(t => t.Jogadores).SingleOrDefault(m => m.Id == id);
+            var torneio = _context.Torneio.Include(t => t.Jogadores).Include(t => t.Jogos).ThenInclude(t => t.Tabuleiro).SingleOrDefault(m => m.Id == id);
             if (torneio == null)
             {
                 return NotFound();
@@ -115,8 +115,34 @@ namespace Connect4.Controllers
                                 .FirstOrDefault();
                 }
             }
-            ViewBag.JogadorResultados = jogadorResultados;
-            return View(jogadorResultados);
+            foreach (var item in jogadorResultados)
+            {
+                item.Pontos = 0;
+            }
+            foreach (var item in torneio.Jogos)
+            {
+                if (item.Tabuleiro.Resultado == -1)
+                {
+                    var jog1 = jogadorResultados.Where(j => j.Jogador.Id == item.Jogador1Id).FirstOrDefault();
+                    var jog2 = jogadorResultados.Where(j => j.Jogador.Id == item.Jogador2Id).FirstOrDefault();
+                    jog1.Pontos = jog1.Pontos + 1;
+                    jog2.Pontos = jog2.Pontos + 1;
+                }
+                if (item.Tabuleiro.Resultado == 1)
+                {
+                    var jog1 = jogadorResultados.Where(j => j.Jogador.Id == item.Jogador1Id).FirstOrDefault();
+                    jog1.Pontos = jog1.Pontos + 3;
+                }
+                if (item.Tabuleiro.Resultado == 2)
+                {
+                    var jog2 = jogadorResultados.Where(j => j.Jogador.Id == item.Jogador2Id).FirstOrDefault();
+                    jog2.Pontos = jog2.Pontos + 3;
+                }
+            }
+            var ranking = (from item in jogadorResultados
+                           orderby item.Pontos descending
+                           select item).ToList();
+            return View(ranking);
         }
 
         [HttpPost]
