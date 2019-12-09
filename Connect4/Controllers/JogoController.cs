@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Connect4.Controllers
 {
-  
+
     /// <summary>
     /// Controlador para o ModelJogos.
     /// Opção para entrar no Lobby, criar jogos e excluir Jogos.
@@ -49,21 +49,16 @@ namespace Connect4.Controllers
         /// <returns></returns>
         public IActionResult Tabuleiro(int id)
         {
-
-
             Torneio torneio = new Torneio();
-
-          
 
             if (torneio.Id != 0)
             {
-                  ViewBag.mensagem = "Modo Torneio";
+                ViewBag.mensagem = "Modo Torneio";
             }
             if (torneio.Id == 0)
             {
                 ViewBag.mensagem = "Modo Amistoso";
             }
-
 
             //Recupera Jogo do banco de dados.
             //Repare que a inclusão de j.Jogador1, não trará
@@ -164,12 +159,7 @@ namespace Connect4.Controllers
         /// </summary>
         /// <returns>Redireciona o usuário para o Lobby.</returns>
         public IActionResult CriarJogo()
-
-
-      {
-
-          
-
+        {
             Jogo jogo;
             int? jogadorId =
                 _userManager.GetUserAsync(User).Result.JogadorId;
@@ -217,8 +207,6 @@ namespace Connect4.Controllers
         [Authorize]
         public IActionResult ContinuarJogo()
         {
-
-
             JogadorPessoa JogadorPessoa;
             List<Jogo> Jogos;
             int? JogadorId = _userManager.GetUserAsync(User).Result.JogadorId;

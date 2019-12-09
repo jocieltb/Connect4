@@ -1,0 +1,36 @@
+﻿@model IEnumerable<JogadorResultados>
+
+@{
+    ViewData["Title"] = "JogadorResultados";
+}
+
+<h2>Ranking </h2>
+
+<p>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-default">Back to Home </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Jogador)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pontos)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.JogadorResultados as List<JogadorResultados>)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Jogador.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pontos)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

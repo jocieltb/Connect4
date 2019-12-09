@@ -18,7 +18,7 @@ namespace Connect4.Models
         public static int NUMERO_LINHAS = 6;
         private static int NUMERO_JOGADORES = 2;
 
-        public int QtdJogadas{get;set;}
+        public int QtdJogadas { get; set; }
 
         /// <summary>
         /// 
@@ -27,7 +27,6 @@ namespace Connect4.Models
         /// Entity Framework.
         [NotMapped]
         public int[,] RepresentacaoTabuleiro { get; set; }
-
 
         /// <summary>
         /// Não é possível para o Entity Framework mapear um array multidimensional.
@@ -66,7 +65,6 @@ namespace Connect4.Models
             }
         }
 
-        
         public int Turno { get; set; } = new Random().Next(1, 3);
 
         public void AlternaTurno()
@@ -81,9 +79,9 @@ namespace Connect4.Models
             this.RepresentacaoTabuleiro = new int[NUMERO_COLUNAS, NUMERO_LINHAS];
         }
 
-        public Tabuleiro(int [][] repTabuleiro)
+        public Tabuleiro(int[][] repTabuleiro)
         {
-            RepresentacaoTabuleiro = new int[repTabuleiro.Length,repTabuleiro[repTabuleiro.Length-1].Length];
+            RepresentacaoTabuleiro = new int[repTabuleiro.Length, repTabuleiro[repTabuleiro.Length - 1].Length];
             for (int coluna = 0; coluna < RepresentacaoTabuleiro.GetLength(0); coluna++)
             {
                 for (int linha = 0; linha < repTabuleiro.GetLength(1); linha++)
@@ -95,7 +93,7 @@ namespace Connect4.Models
         public Tabuleiro(int[,] repTabuleiro)
         {
             RepresentacaoTabuleiro = repTabuleiro;
-            
+
         }
         /// <summary>
         /// Verifica se existe um vencedor no jogo.
@@ -106,7 +104,6 @@ namespace Connect4.Models
         /// 
         public int Resultado { get { return Vencedor(); } }
 
-       
         public int Vencedor()
         {
             int vencedor = 0;
@@ -114,16 +111,24 @@ namespace Connect4.Models
             vencedor = VerificarVencedorColuna();
             //Caso exista retorne o vencedor. Caso contrário continue verificando.
             if (vencedor != 0)
+            {
                 return vencedor;
+            }
             //Verificar se existe um vencedor em alguma linha.
             vencedor = VerificarVencedorLinha();
             if (vencedor != 0)
+            {
                 return vencedor;
+            }
             vencedor = VerificarVencedorDiagonal();
             if (vencedor != 0)
+            {
                 return vencedor;
+            }
             if (isTudoOcupado())
+            {
                 return -1;
+            }
             return 0;
         }
 
@@ -131,20 +136,24 @@ namespace Connect4.Models
         {
             for (int coluna = 0; coluna < RepresentacaoTabuleiro.GetLength(0); coluna++)
             {
-                int contador=1;
-                for (int linha = 1; linha < 
-                    RepresentacaoTabuleiro.GetLength(1); 
-                    linha++) { 
-                    if (RepresentacaoTabuleiro[coluna, linha-1] == 0) { break;}
-                    if (RepresentacaoTabuleiro[coluna,linha] 
-                        == RepresentacaoTabuleiro[coluna, linha-1])
+                int contador = 1;
+                for (int linha = 1; linha <
+                    RepresentacaoTabuleiro.GetLength(1);
+                    linha++)
+                {
+                    if (RepresentacaoTabuleiro[coluna, linha - 1] == 0) { break; }
+                    if (RepresentacaoTabuleiro[coluna, linha]
+                        == RepresentacaoTabuleiro[coluna, linha - 1])
                     {
-                        if (++contador == 4){
-                            return RepresentacaoTabuleiro[coluna,linha];
+                        if (++contador == 4)
+                        {
+                            return RepresentacaoTabuleiro[coluna, linha];
                         }
-                    }else{
-                        contador = 1;                    
-                    }                    
+                    }
+                    else
+                    {
+                        contador = 1;
+                    }
                 }
             }
             return 0;
@@ -155,8 +164,9 @@ namespace Connect4.Models
         /// <returns></returns>
         public Boolean isTudoOcupado()
         {
-            for(int i=0; i<RepresentacaoTabuleiro.GetLength(0);i++) {
-                if(RepresentacaoTabuleiro[i,RepresentacaoTabuleiro.GetLength(1)-1] == 0)
+            for (int i = 0; i < RepresentacaoTabuleiro.GetLength(0); i++)
+            {
+                if (RepresentacaoTabuleiro[i, RepresentacaoTabuleiro.GetLength(1) - 1] == 0)
                 {
                     return false;
                 }
@@ -166,15 +176,16 @@ namespace Connect4.Models
 
         public void Jogar(int Jogador, int Posicao)
         {
-            if(Jogador!= this.Turno)
+            if (Jogador != this.Turno)
             {
                 throw new ArgumentException($"Não é a vez do jogador {Jogador}");
             }
-            if(Posicao < 0)
+            if (Posicao < 0)
             {
                 throw new ArgumentException("A posição não pode " +
                     "ser menor que 0.");
-            }else if(Posicao > NUMERO_COLUNAS - 1)
+            }
+            else if (Posicao > NUMERO_COLUNAS - 1)
             {
                 throw new ArgumentException
                     ("A posição não pode ser " +
@@ -185,7 +196,7 @@ namespace Connect4.Models
             {
                 if (RepresentacaoTabuleiro[Posicao, linha] == 0)
                 {
-                    RepresentacaoTabuleiro[Posicao, linha] 
+                    RepresentacaoTabuleiro[Posicao, linha]
                         = Jogador;
                     AlternaTurno();
                     return;
@@ -204,13 +215,13 @@ namespace Connect4.Models
                     RepresentacaoTabuleiro.GetLength(0);
                     coluna++)
                 {
-                    if (RepresentacaoTabuleiro[coluna-1,linha] == 0) { break; }
-                    if (RepresentacaoTabuleiro[coluna,linha]
-                        == RepresentacaoTabuleiro[coluna-1,linha])
+                    if (RepresentacaoTabuleiro[coluna - 1, linha] == 0) { break; }
+                    if (RepresentacaoTabuleiro[coluna, linha]
+                        == RepresentacaoTabuleiro[coluna - 1, linha])
                     {
                         if (++contador == 4)
                         {
-                            return RepresentacaoTabuleiro[coluna,linha];
+                            return RepresentacaoTabuleiro[coluna, linha];
                         }
                     }
                     else
@@ -225,8 +236,9 @@ namespace Connect4.Models
         public int VerificarVencedorDiagonal()
         {
             for (int coluna = 0; coluna < RepresentacaoTabuleiro.GetLength(0); coluna++)
-            {            
-                for (int linha = 0; linha < RepresentacaoTabuleiro.GetLength(1); linha++) { 
+            {
+                for (int linha = 0; linha < RepresentacaoTabuleiro.GetLength(1); linha++)
+                {
                     int resultado = VerificarDiagonal(coluna, linha);
                     if (resultado != 0)
                         return resultado;
@@ -235,24 +247,24 @@ namespace Connect4.Models
             return 0;
         }
 
-        private int VerificarDiagonal(int coluna, int linha )
+        private int VerificarDiagonal(int coluna, int linha)
         {
-            if (RepresentacaoTabuleiro[coluna,linha] == 0)
+            if (RepresentacaoTabuleiro[coluna, linha] == 0)
                 return 0;
-            if(linha +4 < this.RepresentacaoTabuleiro.GetLength(1))
+            if (linha + 4 < this.RepresentacaoTabuleiro.GetLength(1))
             {
                 if (coluna - 4 >= 0)
                 {
                     int i = 1;
                     for (i = 1; i < 4; i++)
                     {
-                        if (RepresentacaoTabuleiro[coluna,linha] !=
-                            RepresentacaoTabuleiro[coluna - i,linha + i])
+                        if (RepresentacaoTabuleiro[coluna, linha] !=
+                            RepresentacaoTabuleiro[coluna - i, linha + i])
                             break;
                     }
                     if (i == 4)
                     {
-                        return RepresentacaoTabuleiro[coluna,linha];
+                        return RepresentacaoTabuleiro[coluna, linha];
                     }
                 }
                 if (coluna + 4 < this.RepresentacaoTabuleiro.GetLength(0))
@@ -260,18 +272,16 @@ namespace Connect4.Models
                     int i = 1;
                     for (i = 1; i < 4; i++)
                     {
-                        if (RepresentacaoTabuleiro[coluna,linha] !=
-                            RepresentacaoTabuleiro[coluna + i,linha + i])
+                        if (RepresentacaoTabuleiro[coluna, linha] !=
+                            RepresentacaoTabuleiro[coluna + i, linha + i])
                             break;
                     }
                     if (i == 4)
                     {
-                        return RepresentacaoTabuleiro[coluna,linha];
+                        return RepresentacaoTabuleiro[coluna, linha];
                     }
                 }
-
             }
-
             return 0;
         }
     }

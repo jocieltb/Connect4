@@ -8,10 +8,11 @@ namespace Connect4.Models
     public class JogadorResultados
     {
         public int Id { get; set; }
+
         public Jogador Jogador { get; set; }
 
         public Torneio Torneio { get; set; }
 
-        public int Pontos { get; set; }
+        public int Pontos { get; set; } = 0;
     }
 }

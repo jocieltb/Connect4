@@ -33,14 +33,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Início</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">Sobre</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contato</a></li>
-                    <li>
-                        <a asp-area="" asp-controller="Torneios" asp-action="Index">Torneios</a>
-
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="JogadorResultados" asp-action="Index">Ranking</a>
-
-                    </li>
+                    <li><a asp-area="" asp-controller="Torneios" asp-action="Index">Torneios</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>

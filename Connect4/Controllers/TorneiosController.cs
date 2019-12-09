@@ -26,24 +26,6 @@ namespace Connect4.Controllers
             return View(await _context.Torneio.ToListAsync());
         }
 
-        // GET: Torneios/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var torneio = await _context.Torneio
-                .SingleOrDefaultAsync(m => m.Id == id);
-            if (torneio == null)
-            {
-                return NotFound();
-            }
-
-            return View(torneio);
-        }
-
         [Authorize]
         // GET: Torneios/Create
         public IActionResult Create()
@@ -111,6 +93,22 @@ namespace Connect4.Controllers
             return View(viewModel);
         }
 
+        public IActionResult JogadorResultados(int id)
+        {
+            var torneio = _context.Torneio.Include(t => t.Jogadores).SingleOrDefault(m => m.Id == id);
+            if (torneio == null)
+            {
+                return NotFound();
+            }
+            List<JogadorResultados> jogadorResultados = new List<JogadorResultados>();
+            if (torneio.Jogadores != null)
+            {
+                jogadorResultados = _context.JogadorResultados.Include(j => j.Jogador).Where(j => j.Torneio.Id == id).ToList();
+            }
+            ViewBag.JogadorResultados = jogadorResultados;
+            return View(jogadorResultados);
+        }
+
         [HttpPost]
         public IActionResult SelecionarJogadores(
             int id,
@@ -131,13 +129,8 @@ namespace Connect4.Controllers
             }
             _context.SaveChanges();
 
-            if(torneio.QuantidadeJogadores == torneio.Jogadores.Count())
+            if (torneio.QuantidadeJogadores == torneio.Jogadores.Count())
             {
-                
-                //int i = 0;
-                //int j = 0;
-                //int cont = 0;
-                
                 for (int i = 0; i < torneio.QuantidadeJogadores - 1; i++)
                 {
                     for (int j = 0; j < (torneio.QuantidadeJogadores - 1) - i; j++)
@@ -148,8 +141,14 @@ namespace Connect4.Controllers
                         torneio.Jogos.Add(Jogo);
                         _context.Add(Jogo);
                     }
-                   // j = 0;
                 }
+            }
+            for (int i = 0; i < torneio.QuantidadeJogadores; i++)
+            {
+                JogadorResultados JogadorResultados = new JogadorResultados();
+                JogadorResultados.Torneio = torneio;
+                JogadorResultados.Jogador = torneio.Jogadores[i];
+                _context.Add(JogadorResultados);
             }
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
